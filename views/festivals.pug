@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+
+  -
+    let results = [
+      { festival_name: "Timkat", location: "Ethiopia", attendance: 5000 },
+      { festival_name: "Meskel", location: "Ethiopia", attendance: 8000 },
+      { festival_name: "Irreecha", location: "Ethiopia", attendance: 12000 }
+    ];
+
+  div.container-fluid
+    div.row
+      each item, index in results
+        div.col-sm-2(
+          onclick=`alert('You purchased item number ${index + 1}')`
+          style="cursor: pointer; border: 1px solid #ccc; padding: 10px; margin: 5px;"
+        )
+          p Festival: #{item.festival_name}
+          p Location: #{item.location}
+          p Attendance: #{item.attendance}

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to Hana Tolera's Web Applications Assignment 10
+  button(type="button", class="btn btn-secondary", onclick="reduce()") Sample Button
+  div#use Take some away
+
+  a(href="/festivals") View Festival Search Results
+
+  script.
+    let current = 11;
+    let quantity = 2;
+
+    function reduce() {
+      current = current - quantity;
+
+      if (current < 0) {
+        current = 0;
+      }
+
+      document.getElementById("use").textContent =
+        `Reduced by ${quantity} to ${current}`;
+    }
