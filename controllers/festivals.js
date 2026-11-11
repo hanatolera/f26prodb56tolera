@@ -1,8 +1,13 @@
 var Festival = require('../models/festival');
 
-
-exports.festival_list = function (req, res) {
-    res.send('NOT IMPLEMENTED: Festival list');
+exports.festival_list = async function (req, res) {
+    try {
+        const theFestivals = await Festival.find();
+        res.json(theFestivals);
+    }
+    catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 };
 
 
