@@ -16,8 +16,23 @@ exports.festival_detail = function (req, res) {
 };
 
 
-exports.festival_create_post = function (req, res) {
-    res.send('NOT IMPLEMENTED: Festival create POST');
+exports.festival_create_post = async function (req, res) {
+    console.log(req.body);
+
+    let document = new Festival();
+
+    document.name = req.body.name;
+    document.location = req.body.location;
+    document.date = req.body.date;
+
+    try {
+        let result = await document.save();
+        res.send(result);
+    }
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": "${err.message}"}`);
+    }
 };
 
 

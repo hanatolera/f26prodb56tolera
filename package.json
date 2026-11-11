@@ -13,6 +13,9 @@
   "author": "Hana Tolera",
   "type": "commonjs",
   "main": "app.js",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "start": "node ./bin/www"
   },
