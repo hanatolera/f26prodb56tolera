@@ -29,3 +29,16 @@ exports.festival_delete = function (req, res) {
 exports.festival_update_put = function (req, res) {
     res.send('NOT IMPLEMENTED: Festival update PUT ' + req.params.id);
 };
+
+exports.festival_view_all_Page = async function (req, res) {
+    try {
+        const theFestivals = await Festival.find();
+        res.render('festivals', {
+            title: 'Festival Search Results',
+            results: theFestivals
+        });
+    }
+    catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
