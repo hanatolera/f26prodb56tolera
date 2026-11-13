@@ -11,8 +11,15 @@ exports.festival_list = async function (req, res) {
 };
 
 
-exports.festival_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: Festival detail: ' + req.params.id);
+exports.festival_detail = async function (req, res) {
+    console.log("detail " + req.params.id);
+    try {
+        let result = await Festival.findById(req.params.id);
+        res.send(result);
+    } catch (error) {
+        res.status(500);
+        res.send(`{"error": "Document for id ${req.params.id} not found"}`);
+    }
 };
 
 
@@ -41,8 +48,22 @@ exports.festival_delete = function (req, res) {
 };
 
 
-exports.festival_update_put = function (req, res) {
-    res.send('NOT IMPLEMENTED: Festival update PUT ' + req.params.id);
+exports.festival_update_put = async function (req, res) {
+    try {
+        const result = await Festival.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+
+        if (!result) {
+            return res.status(404).json({ error: "Festival not found" });
+        }
+
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 };
 
 exports.festival_view_all_Page = async function (req, res) {
